@@ -20,6 +20,7 @@ class linearRegression():
         return J
 
     #Gradient Descent Fucntion to calculate best fit theta values
+    #This is the most important function
     def GradientDescent(self, X, y, theta, alpha, iters):
         jValues = np.zeros(shape=(iters))
         m = y.size
@@ -32,24 +33,23 @@ class linearRegression():
             jValues[i] = self.ComputeCost(X,y,theta)
         return theta, jValues
 
-    #Tester function to test variables and vectors
-    def outt(self):
+    #Function to run our program
+    def run(self):
         #print (self.training_features)
         #print (self.training_labels)
-        iters = 1000
-        alpha = 0.01
+        iters = 1500
+        alpha = 0.07
         theta = np.zeros(2)
         thetaFinal, J = self.GradientDescent(self.training_features, self.training_labels, theta, alpha, iters)
+
+        #Our final training parameters
         print ("Final Theta Values: ", thetaFinal)
-        print (J[:5])
         plt.xlabel("Age(Years)")
         plt.ylabel("Height(Meters)")
         plt.scatter(self.training_features, self.training_labels)
-        #plt.plot(self.training_features, self.training_labels)
-        #plt.show()
         plt.plot(self.training_features, theta[0] + self.training_features.dot(theta[1]))
         plt.show()
 
 
 model = linearRegression()
-model.outt()
+model.run()
