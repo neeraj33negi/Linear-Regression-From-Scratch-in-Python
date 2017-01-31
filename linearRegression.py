@@ -47,7 +47,7 @@ class linearRegression():
         plt.scatter(self.training_features, self.training_labels)
         #plt.plot(self.training_features, self.training_labels)
         #plt.show()
-        plt.plot(theta[0] + self.training_features.dot(theta[1]))
+        plt.plot(self.training_features, theta[0] + self.training_features.dot(theta[1]))
         plt.show()
 
 
