@@ -8,7 +8,6 @@ class linearRegression():
         #LOADING training dataset from external file
         self.dataset_features = np.loadtxt('ex2x.dat')
         self.dataset_labels = np.loadtxt('ex2y.dat')
-        #Splitting dataset into training and testing data
         self.training_features = np.array(self.dataset_features)
         self.training_labels = np.array(self.dataset_labels)
 
@@ -25,6 +24,7 @@ class linearRegression():
         jValues = np.zeros(shape=(iters))
         m = jValues.size
         for i in range(iters):
+            print (theta)
             J = self.ComputeCost(X,y, theta)
             temp0 = theta[0] - alpha*(1/m)* J
             temp1 = theta[1] - alpha*(1/m)* J
