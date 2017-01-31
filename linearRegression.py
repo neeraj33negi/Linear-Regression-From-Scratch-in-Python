@@ -22,15 +22,13 @@ class linearRegression():
     #Gradient Descent Fucntion to calculate best fit theta values
     def GradientDescent(self, X, y, theta, alpha, iters):
         jValues = np.zeros(shape=(iters))
-        m = jValues.size
+        m = y.size
         for i in range(iters):
-            print (theta)
-            J = self.ComputeCost(X,y, theta)
-            temp0 = theta[0] - alpha*(1/m)* J
-            temp1 = theta[1] - alpha*(1/m)* J
-            theta[0] = temp0
-            theta[1] = temp1
-            #print (theta)
+            predictions = theta[0] + X.dot(theta[1])
+            err1 = (predictions - y)
+            err2 = (predictions - y) * X
+            theta[0] -= alpha * (1./m) * err1.sum()
+            theta[1] -= alpha * (1./m) * err2.sum()
             jValues[i] = self.ComputeCost(X,y,theta)
         return theta, jValues
 
@@ -47,12 +45,9 @@ class linearRegression():
         plt.xlabel("Age(Years)")
         plt.ylabel("Height(Meters)")
         plt.scatter(self.training_features, self.training_labels)
-        plt.plot(self.training_features, self.training_labels)
-        plt.show()
-        x = np.zeros(J.size)
-        for i in range(0,x.size-1):
-            x[i] = i
-        plt.scatter(x, J)
+        #plt.plot(self.training_features, self.training_labels)
+        #plt.show()
+        plt.plot(theta[0] + self.training_features.dot(theta[1]))
         plt.show()
 
 
